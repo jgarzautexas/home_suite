@@ -1,35 +1,35 @@
-from tastypie import fields
-from tastypie.authentication import Authentication
-from tastypie.authorization import Authorization
-from tastypie.validation import Validation, FormValidation
-from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-from . import models, forms
+# from tastypie import fields
+# from tastypie.authentication import Authentication
+# from tastypie.authorization import Authorization
+# from tastypie.validation import Validation, FormValidation
+# from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
+# from . import models, forms
 
 
-class QuickListResource(ModelResource):
+# class QuickListResource(ModelResource):
 
-    class Meta:
-        queryset = models.QuickList.objects.all().select_related('grocery_item')
-        resource_name = 'quick_list'
-        authorization = Authorization()
-        authentication = Authentication()
-        validation = FormValidation(form_class=forms.QuickListForm)
-        always_return_data = True
-        allowed_methods = ['get',]
+#     class Meta:
+#         queryset = models.QuickList.objects.all().select_related('grocery_item')
+#         resource_name = 'quick_list'
+#         authorization = Authorization()
+#         authentication = Authentication()
+#         validation = FormValidation(form_class=forms.QuickListForm)
+#         always_return_data = True
+#         allowed_methods = ['get',]
 
 
-class QuickItemResource(ModelResource):
-    grocery_list = fields.ForeignKey(QuickListResource, 'grocery_list')
-    # grocery_cat = fields.ForeignKey(GroceryListResource, 'grocery_list')
+# class QuickItemResource(ModelResource):
+#     grocery_list = fields.ForeignKey(QuickListResource, 'grocery_list')
+#     # grocery_cat = fields.ForeignKey(GroceryListResource, 'grocery_list')
 
-    class Meta:
-        queryset = models.QuickListItem.objects.all().select_related('grocery_list__title')
-        resource_name = 'item'
-        authorization = Authorization()
-        validation = FormValidation(form_class=forms.QuickListItemForm)
-        filtering = {
-            'grocery_list': ALL_WITH_RELATIONS,
-        }
+#     class Meta:
+#         queryset = models.QuickListItem.objects.all().select_related('grocery_list__title')
+#         resource_name = 'item'
+#         authorization = Authorization()
+#         validation = FormValidation(form_class=forms.QuickListItemForm)
+#         filtering = {
+#             'grocery_list': ALL_WITH_RELATIONS,
+#         }
 
 
 '''
