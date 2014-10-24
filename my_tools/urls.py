@@ -1,6 +1,6 @@
 
 from django.conf.urls import patterns, include, url
-from tastypie.api import Api
+# from tastypie.api import Api
 
 from django.contrib import admin
 admin.autodiscover()
