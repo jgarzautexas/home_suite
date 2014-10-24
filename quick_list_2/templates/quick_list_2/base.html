@@ -1,0 +1,47 @@
+ {% load staticfiles %}
+  <!DOCTYPE html> 
+<html>
+<head>
+  <title>Personal Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />
+  <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+   <script src="{% static "foundation-5.3.3/js/vendor/jquery.cookie.js" %}"></script>
+  <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+  <script src="{% static "quick_list_2/quick_list_2.js" %}"></script>
+  <style type="text/css">
+    #list_form {
+      display: none;
+    }
+  </style>
+  <script type="text/javascript">
+    $(document).on('pagecreate', function(evt){
+
+    });
+  </script>
+    <script type="text/javascript">
+    $(function(){
+        $("[data-role='header'], [data-role='footer']").toolbar();
+    });
+    </script>
+</head>
+
+<body>
+    <div data-role="header" data-position="fixed" data-theme="a">
+      {% block header %}
+        <h1></h1>
+<!--         <a href="" data-rel="back">Back</a> -->
+      {% endblock header %}
+    </div>
+ {% csrf_token %}
+  {% block content %}
+
+  {% endblock content %}
+  
+  <div data-role="footer" data-position="fixed" data-theme="a">
+    <h1>Created by J Garza.</h1>
+  </div>
+
+
+</body>
+</html>

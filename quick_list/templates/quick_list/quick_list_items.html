@@ -1,0 +1,71 @@
+
+{% extends 'quick_list/base.html' %}
+
+{% block content %}
+
+<ul class="pricing-table">
+  <li class="title">{{quick_list}}</li>
+  <li class="price"></li>
+  <li class="bullet-item">
+      <div class="row list_filter_row">
+        <div class="small-4 large-4 columns list_filter" id="all_selection"><h4><span class="header">All</span></h4></div>
+        <div class="small-4 large-4 columns list_filter" id="active_selection"><h4><span class="subheader">Active</span></h4></div>
+        <div class="small-4 large-4 columns list_filter" id="complete_selection"><h4><span class="subheader">Completed</span></h4></div>
+      </div>
+  </li>
+  <div class="row"></div>
+    {% include "quick_list/new_item_form.html" %}
+</ul>
+
+
+<ul class="pricing-table" id="item_ul">
+    <!-- <li class="title"></li> -->
+    <li class="price"></li>
+
+    <!-- {# for i in grocery_list.groceryitem_set.all #} -->
+    {% for i in quick_list_items %}
+        <form class="exist_item_form">
+            <input id="id_item_id" name="item_id" type="hidden" value="{{i.id}}">
+            <input id="id_quick_list" name="quick_list" type="hidden" value="{{quick_list.id}}">
+            <input id="id_name" name="name" type="hidden" value="{{i.name}}">
+            <input id="id_active" name="active" type="hidden" value="{{i.active}}">
+            {% if i.category %}
+                <input id="id_category" name="category" type="hidden" 
+                    value="{{i.category|default:None}}">
+            {% endif %}
+ 
+                <li {% if not i.active %} 
+                        style="text-decoration: line-through" 
+                    {% endif %}
+                    class="bullet-item exist-item-link">
+                    {% if i.active %}
+                        <h4 class="header">{{i.name}}</h4>
+                     {% else %}
+                        <h4 class="subheader">{{i.name}}</h4>
+                    {% endif %}
+
+                 </li>
+        </form>
+   {% endfor %}
+</ul>
+
+
+<div class="panel clearfix">
+    <a class="right nice small radius red button">Complete</a>
+    <a href="/quick_list/{{quick_list.id}}/items" class="right nice small radius red button">Refresh</a>
+    <form id="delete_list_form" method="POST">
+        <input id="id_quick_list" name="quick_list" type="hidden" value="{{quick_list.id}}">
+        <a href="/quick_list" class="delete_list_button left nice small radius red button">Delete Quick List</a>
+    </form>
+     
+</div>
+
+<a href="#" data-reveal-id="myModal">Click Me For A Modal</a>
+
+<div id="myModal" class="reveal-modal" data-reveal>
+  <h2>Awesome. I have it.</h2>
+  <p class="lead">Your couch.  It is mine.</p>
+  <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+{% endblock %}

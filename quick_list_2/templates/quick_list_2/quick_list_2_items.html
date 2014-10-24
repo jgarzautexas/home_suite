@@ -1,0 +1,38 @@
+{% extends 'quick_list_2/base.html' %}
+
+      {% block header %}
+        <h1>{{ quick_list.title }}</h1>
+        <a href="" data-role="button" data-inline="true" data-rel="back" data-icon="back">Back</a>
+        <a href="" data-role="button" data-inline="true" data-icon="refresh">Refresh</a>
+      {% endblock header %}
+
+{% block content %}
+<!-- 
+<a href="" data-role="button" data-inline="true" data-rel="back" data-icon="back">Back</a>
+<a href="" data-role="button" data-inline="true" data-icon="refresh">Refresh</a> -->
+
+    <div class="ui-content">
+        <form method="POST" action="" id="item_form">
+            {% csrf_token %}
+            {{ form.name }}
+            <input type="submit" data-icon="plus" class="ui-btn ui-btn-icon-left" value="Add">
+        </form>
+    </div>
+
+    <div class="ui-content">
+      <ul data-inset="true" data-role="listview" data-filter="true" data-filter-placeholder="Filter List Items...">
+        {% for i in items %}
+              <li class="exist_item_form">
+                 {% csrf_token %}
+                <input id="id_item_id" name="item_id" type="hidden" value="{{i.id}}">
+                <input id="id_quick_list_id" name="quick_list_id" type="hidden" value="{{quick_list.id}}">
+                <a class="item_button_form" href="">{{i.name}}</a>
+                <!-- <a href="{% url 'quick_list_items' i.id %}">{{i.name}}</a> -->
+                <a href="/quick_list_2/{{i.id}}"  class="item_delete" data-icon="delete" data-iconpos="notext">Delete</a>
+              </li>  
+
+        {% endfor %}
+      </ul>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,126 @@
+ {% load staticfiles %}
+<!doctype html>
+
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Personal Assistant</title>
+        <link rel="stylesheet" href="{% static "foundation-5.3.3/css/foundation.css" %}" />
+        <link rel="stylesheet" href="{% static "js/jquery-ui-1.11.1.custom/jquery-ui.min.css" %}"></link>
+
+        <script src="{% static "foundation-5.3.3/js/vendor/modernizr.js" %}"></script>
+        <style>  
+           /* .ng-invalid.ng-dirty {
+                border-color: #FA787E;
+            }
+            .ng-valid.ng-dirty {
+                border-color: #78FA89;
+             }*/
+             .list_item_delete{
+              display: none;
+             }
+             #quick_list_form {
+              display: none;
+             }
+            /* #new_item_form {
+              display: none;
+             }*/
+        </style>
+    </head>
+    <body> 
+
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    <nav class="tab-bar">
+      <section class="left-small">
+        <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+      </section>
+
+      <section class="middle tab-bar-section">
+        <h1 class="title"></h1>
+      </section>
+
+<!--       <section class="right-small">
+        <a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+      </section> -->
+    </nav>
+
+    <aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        <li><label>Main Menu</label></li>
+        <li><a href="/">Quick List</a></li>
+        <li><a href="/quick_list_2">Quick List V2</a></li>
+        <li><a href="/">Media Center (Coming Soon)</a></li>
+        <li><a href="/">Security Monitors (Coming Soon)</a></li>
+        <li><a href="/">Placeholder 3</a></li>
+      </ul>
+    </aside>
+<!-- 
+    <aside class="right-off-canvas-menu">
+      <ul class="off-canvas-list">
+        <li><label>Users</label></li>
+        <li><a href="#">Hari Seldon</a></li>
+        <li><a href="#">...</a></li>
+      </ul>
+    </aside> -->
+
+    <section class="main-section">
+      <!-- content goes here -->
+      {% csrf_token %}
+      {% block content %}
+      {% endblock %} 
+
+    </section>
+
+  <a class="exit-off-canvas"></a>
+
+  </div>
+</div>
+
+
+    <script src="{% static "foundation-5.3.3/js/vendor/jquery.js" %}"></script>
+    <script src="{% static "foundation-5.3.3/js/foundation.min.js" %}"></script>
+    <script src="{% static "foundation-5.3.3/js/vendor/jquery.cookie.js" %}"></script>
+    <script src="{% static "js/jquery-ui-1.11.1.custom/jquery-ui.min.js" %}"></script>
+    <!-- // <script src="{% static "grocery_list/jquery.mobile-1.4.3/jquery.mobile-1.4.3.min.js" %}"></script> -->
+    
+    <script src="{% static "quick_list/app.js" %}"></script>
+
+    <script>
+      $(document).foundation();
+    </script>
+<script>
+  $(function() {
+    var availableTags = [
+      "Apples",
+      "Bananas",
+      "Bacon",
+      "Bread",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lettuce",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme",
+      "Tomatoes"
+    ];
+    $( "#id_name" ).autocomplete({
+      source: availableTags
+    });
+  });
+  </script>
+  </body>
+</html>
+

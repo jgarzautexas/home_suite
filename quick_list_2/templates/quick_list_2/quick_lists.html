@@ -1,0 +1,32 @@
+
+{% extends 'quick_list_2/base.html' %}
+
+{% block content %}
+<div data-role="page" id="pageone">
+
+    <div class="ui-content">
+      <ul data-inset="true" data-role="listview" data-filter="true" data-filter-placeholder="Filter List Names...">
+        {% for l in quick_list %}
+          <li class="list_title">
+            <a href="{% url 'quick_list_items' l.id %}">{{l.title}}</a>
+            <!-- <a href=""  data-icon="delete" data-iconpos="notext">Delete</a> -->
+          </li>  
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div id="list_form_content" class="ui-content">
+      <form method="POST" action="" id="list_form">
+        {% csrf_token %}
+        {{ form.title }}
+        <input type="submit" data-icon="plus" class="ui-btn ui-btn-icon-left" value="Add">
+      </form>
+    </div>
+    <div class="ui-content list_buttons">
+    <!-- <a href="#pagetwo">Go to Dialog Page</a> -->
+      <a href="" id="add_list_button" class="ui-btn ui-btn-inline">Add Quick List</a>
+      <a href="" class="ui-btn ui-btn-inline" >Refresh</a>
+   </div>
+</div>
+
+{% endblock %}
